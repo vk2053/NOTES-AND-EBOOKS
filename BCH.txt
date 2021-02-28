@@ -1,0 +1,29 @@
+clear all;
+clc;
+m =input ('m=') ;
+fprintf('Codeword length ')
+n = 2^m-1 % Codeword length
+k = input ('enter message length k='); % Message length
+m=input('enter the message of the length m=')
+msg = gf(m)
+% Find t, the error-correction capability.
+[genpoly,t] = bchgenpoly(n,k);
+disp('Error correcting capability :');
+disp(t);
+%t2=input('Enter no. of errors to be added to produce noisy code :');
+% Encode the message.
+code = bchenc(msg,n,k)
+% Corrupt up to t2 bits in each codeword.
+tn=1*6;
+noisycode = code + randerr(1,n,1:tn)
+% Decode the noisy code.
+[newmsg,err,ccode] = bchdec(noisycode,n,k);
+fprintf('new message=')
+disp(newmsg)
+INFORMATION THEORY AND CODING TECHNIQUES
+SRCOE LONIKAND, PUNE
+if msg==newmsg
+disp('The message was recovered perfectly.')
+else
+disp('Error in recovery of message.')
+end;

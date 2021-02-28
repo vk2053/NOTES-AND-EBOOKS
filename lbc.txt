@@ -1,0 +1,56 @@
+#include<stdio.h>
+#include<conio.h>
+void main()
+{
+inti,j,n,k,M[10],C[10],G[10][10],par[10][10];
+clrscr();
+printf(" For A Generator Matrix Enter :\n");
+printf("1. The No Of Message Bits(n)\t: ");
+scanf("%d",&n);
+printf("2. The No Of Parity Bits(k)\t: ");
+scanf("%d",&k);
+printf("\nEnter The Elements Of Generator Matrix:\n");
+for(i=0;i<k;i++)
+for(j=0;j<n;j++)
+scanf("%d",&G[i][j]);
+printf("\nEnter The Message Bits\n");
+for(i=0;i<k;i++)
+scanf("%d",&M[i]);
+printf("\t\t\tResult\n");
+printf("____________________________________________________");
+printf("\n\tThe Generator Matrix Is :\n\t");
+for(i=0;i<k;i++)
+{
+for(j=0;j<n;j++)
+printf("%d\t",G[i][j]);
+printf("\n\t");
+}
+printf("\n\tThe Parity Matrix Is :\n\t");
+for(i=0;i<k;i++)
+{
+for(j=0;j<n-k;j++)
+{
+par[i][j]=G[i][j+k];
+printf("%d\t",par[i][j]);
+}
+printf("\n\t");
+}
+printf("\n\tTheMessege Bits :\n\t");
+for(i=0;i<k;i++)
+printf("%d ",M[i]);
+printf("\n\n\tThe Parity Bits :");
+for(i=0;i<n-k;i++)
+{
+C[i] = 0;
+for(j=0;j<k;j++)
+C[i]=(C[i] + M[j] * par[j][i])%2;
+printf("\n\tC%d = %d",i+1,C[i]);
+}
+printf("\n\n\tCode Word For Given Messege Bit:\n\t");
+for(i=0;i<k;i++)
+printf("%d ",M[i]);
+for(i=0;i<n-k;i++)
+printf("%d ",C[i]);
+printf("\n____________________________________________________");
+getch();
+}

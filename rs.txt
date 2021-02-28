@@ -1,0 +1,21 @@
+clear all;
+clc;
+n=input('accept n=');
+k=input('accept k=');
+m=input('accept message=');
+msg=gf([m],k);
+c = rsenc(msg,n,k); % Code will be a Galois array.
+%RS DECODING
+clear all; clc;
+n=input('accept n=');
+k=input('accept k=');
+m=input('accept message=');
+msg=gf([m],k);
+c = rsenc(msg,n,k) % Code will be a Galois array.
+r=c;
+r(1)=2;
+r(3)=1;
+r(10)=29;
+r(11)=12;
+r(12)=18;
+[d,e]=rsdec(r,n,k)
